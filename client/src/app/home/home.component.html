@@ -1,0 +1,32 @@
+<div class="flex justify-content-between">
+    <div class="sidebar" >
+        <app-sidebar ></app-sidebar>
+    </div>
+        
+     <div class="homePosts" *ngIf="this.userHomeService.isAuthenticated">
+        <ng-container  *ngFor="let post of postsHomeService.PostsServiceData">
+            <app-post [post]="post"></app-post>
+            <div class="clearA"></div>
+        </ng-container>
+     </div>
+
+    <div class="rigthbar">
+        <app-rigthbar></app-rigthbar>
+    </div>
+
+</div>
+
+
+
+<div class="container flex" *ngIf="Pages > 1">
+    <mat-paginator 
+    class="center"
+    [length]="Pages"
+    [pageSize]="1"
+    aria-label="Select page"
+    (page)="handlePageEvent($event)"
+   >
+</mat-paginator>
+</div>
+
+

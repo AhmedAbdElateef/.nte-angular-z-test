@@ -1,0 +1,41 @@
+
+   <div class="container-sm flex justify-content-between">
+    
+   
+    <mat-selection-list class="container-sm" #shoes [multiple]="false">
+        <h1>{{UserOrPost? 'Posts':'Users'}}</h1>
+        <mat-slide-toggle  (change)="changeSearch()">
+           Switch Searching To <strong>{{ UserOrPost ? ' Users': 'Posts'}}</strong>
+        </mat-slide-toggle>
+    
+        <!-- posts rendering here -->
+       <ng-container  *ngIf="UserOrPost">
+        <mat-list-option
+        [routerLink]="['/EditShowPost/', data._id]"
+         *ngFor="let data of Posts" 
+         [value]="data">
+            <img matListAvatar [src]="data.selectedFile" alt="...">
+          <div matLine> {{data.title}} </div>
+          <p matLine>
+            <span> {{data.message}} </span>
+          </p>
+        </mat-list-option>
+       </ng-container>
+
+        <!-- users Rendering here -->
+        <ng-container  *ngIf="!UserOrPost">  
+        <mat-list-option  
+        [routerLink]="['/profile/', data._id]"
+        *ngFor="let data of Users"
+        [value]="data">
+            <img matListAvatar [src]="data.imageUrl ? data.imageUrl :'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'" alt="...">
+          <div matLine> {{data.name}} </div>
+          <p matLine>
+            <span> {{data.bio}} </span>
+          </p>
+        </mat-list-option>
+        </ng-container>
+      </mat-selection-list>
+
+
+   </div>

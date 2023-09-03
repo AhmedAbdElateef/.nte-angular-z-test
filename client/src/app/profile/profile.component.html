@@ -1,0 +1,73 @@
+<div class="container-sm">
+   <div class="container flex">
+    
+    <div class="container-left">
+        <div class="clearPM"></div>
+        <img [src]="userData.imageUrl ? userData.imageUrl :'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'"
+         mat-button class="avatar-profile">
+
+    </div>
+    <div *ngIf="!edit" class="container-right">
+       <div>
+        <h1 class="fl half-width">{{userData.name}}</h1>
+        <button 
+             *ngIf="isSameUser"
+             class="fr half-width" 
+             mat-raised-button  
+             color="accent"
+             (click)="edit = !edit"
+             >Edit</button>
+       
+         <ng-container>
+            <button 
+            *ngIf="!isSameUser"
+            class="fr half-width"
+            mat-raised-button  
+            color="{{isFollow ? 'primary':'accent'}}"
+            (click)="follow()"
+            > {{isFollow ? 'unFollow':'Follow'}}</button>
+         </ng-container>
+       </div>
+
+       <div class="clearA"></div>
+       <mat-divider></mat-divider>
+       <div class="clearB"></div>
+
+       <p>{{userData.bio}}</p>
+
+
+      <ng-container *ngIf="userData.followers && userData.following">
+         <h1>
+            {{ posts.length > 0 ? posts.length +' Posts':'No Posts'  }}
+            <span class="space"></span>
+            {{ userData.followers!.length > 0 ? userData.followers!.length +' Followers':'No Followers'  }}  
+            <span class="space"></span>
+            {{ userData.following!.length > 0 ? userData.following!.length +' Following':'No Following'  }} 
+           </h1>
+      </ng-container>
+
+    </div>
+    <div *ngIf="edit"   class="container-right">
+      <app-update [user]="userData" (ChageUpdate)="Updated()"></app-update>
+    </div>
+
+   </div>
+   <mat-divider>POSTS</mat-divider>
+
+</div>
+
+   <!-- Posts Rendering here -->
+
+
+
+   
+<mat-grid-list cols="12" rowHeight="520px" gutterSize="24">
+   <!-- looging Start Here  -->
+    <mat-grid-tile *ngFor="let post of posts" colspan="4" class="pri">
+        <app-post   [inProFile]="true" [post]="post"></app-post>
+    </mat-grid-tile>
+    <!-- looping End Here -->
+ </mat-grid-list>
+
+
+

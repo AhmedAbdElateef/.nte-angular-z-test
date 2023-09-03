@@ -1,0 +1,66 @@
+<mat-card class="example-card">
+    <mat-card-header *ngIf="!inProFile">
+      <div mat-card-avatar  >
+        <img [src]="CreatorUser.imageUrl? CreatorUser.imageUrl :'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'" mat-button  class="avatar-sm">
+      </div>      <mat-card-title>{{CreatorUser.name}}</mat-card-title>
+      <mat-card-subtitle>{{post.createdAt | date }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image  class="{{inProFile ?'ProfilePostsImage':''}}" style="cursor: pointer" (click)="GoToDeatils()"  [src]="post.selectedFile" alt="" >
+       <mat-card-content *ngIf="!inProFile">
+      <h2><strong>{{ post.title }}</strong></h2>
+      <p>
+       {{ post.message | slice:0:100 }}
+      </p> 
+      
+      <p *ngIf="!IsShowEdit">
+        
+        <ng-container  >
+          <h4>{{post.comments[0]}}</h4>
+        </ng-container>
+
+        <a *ngIf="post.comments && post.comments.length > 1" 
+          mat-button color="primary"  (click)="GoToDeatils()" >See More..</a>
+      </p>
+      
+      <p *ngIf="IsShowEdit">
+        <ng-container *ngFor="let com of post.comments let i = index" >
+          <h4>{{ com }}</h4>
+        </ng-container>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+
+      <button class="iconButton" (click)="LovePost()" mat-icon-button>
+        
+        <mat-icon class="love-icon" color="{{ isLoved ? 'warn':'' }}" >
+          favorite
+        </mat-icon>
+         
+        {{ post.likes.length > 0  ?  post.likes.length +  ' Like':'' }} 
+       
+      </button>
+      <div class="clearA"></div>
+      <form class="example-form"> 
+        <mat-form-field class="full-width" appearance="fill">
+          <input 
+            type="text"  
+            name="comment" 
+            [(ngModel)]="Addcomment" 
+            matInput 
+            placeholder="add your comment ..">
+          <mat-icon *ngIf=" Addcomment != '' " 
+                    (click)="addCommentToPost()"
+                    color="warn" 
+                    matSuffix
+                    >add</mat-icon>
+        </mat-form-field>
+      </form>
+
+
+    </mat-card-actions>
+    
+
+  </mat-card>
+  
+
+  

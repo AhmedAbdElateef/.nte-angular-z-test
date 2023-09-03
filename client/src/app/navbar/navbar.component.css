@@ -1,0 +1,32 @@
+.flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .spacer {
+    flex-grow: 1;
+  }
+  
+  .float-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .chat {
+    padding: 2%;
+  }
+
+  .is-notfy-chat-active {
+    color: red !important;
+  }
+
+  .button-spacing {
+    margin-left: 10px; /* Adjust the margin value as per your preference */
+    margin-right: 10px; /* Adjust the margin value as per your preference */
+  }

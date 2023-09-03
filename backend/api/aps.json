@@ -1,0 +1,21 @@
+{
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+      }
+    },
+    "AllowedHosts": "*",
+    "MongoDB": {
+      "ConnectionString": "mongodb+srv://ahmedkhalaf7396:5747723@cluster0.zlsgjon.mongodb.net/?retryWrites=true&w=majority",
+      "mConnectionString":"mongodb://admin:password@mongodb",
+      "DatabaseName": "test",
+      "UserCollection": "users",
+      "postsCollection": "posts"
+     },
+     "JwtSecret":{
+      "Secret":"secret757575a7a7a7a7"
+    },
+    "Urls": "http://localhost:5000"
+  }
+  

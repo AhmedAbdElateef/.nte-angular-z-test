@@ -1,0 +1,4 @@
+obj\Debug\net7.0\Protos/Notification.cs \
+obj\Debug\net7.0\Protos/NotificationGrpc.cs: C:/Users/hp/.nuget/packages/grpc.tools/2.57.0/build/native/include/google/protobuf/empty.proto\
+ C:/Users/hp/.nuget/packages/grpc.tools/2.57.0/build/native/include/google/protobuf/timestamp.proto\
+ Protos/Notification.proto

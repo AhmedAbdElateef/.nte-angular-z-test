@@ -1,0 +1,38 @@
+
+.notification-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  mat-list-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  mat-list-item:hover {
+    padding: 12px;
+    border-bottom: 2px solid #eee;
+    cursor: pointer;
+
+  }
+
+  mat-icon {
+    font-size: 40px;
+    color: #3897f0;
+    margin-right: 10px;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #999;
+  }

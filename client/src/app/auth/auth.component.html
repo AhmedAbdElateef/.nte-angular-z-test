@@ -1,0 +1,66 @@
+<div class="container-sm">
+<mat-grid-list cols="12" rowHeight="300px" gutterSize="1">
+ <mat-grid-tile  colspan="4">
+    <mat-card class="container">
+        <h1>Sign IN</h1>
+        
+        <form (ngSubmit)="Login()" >
+            <table class="full-width" cellspacing="0"><tr>
+              <td><mat-form-field class="full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input name="email" [(ngModel)]="loginForm.email" type="email" matInput>
+              </mat-form-field></td>
+            </tr></table>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Password</mat-label>
+              <input name="email" [(ngModel)]="loginForm.password" type="password" matInput>
+            </mat-form-field>
+            <button 
+                  [disabled]="loadLogin"
+                  mat-raised-button 
+                  color="primary" 
+                  class="full-width">
+                  Login
+            </button>
+        
+        </form>
+      </mat-card>
+  </mat-grid-tile>
+        
+  <mat-grid-tile colspan="1"></mat-grid-tile>
+  <mat-grid-tile  colspan="7" >
+      <mat-card class="full-width" >
+          <h1>Sigin UP</h1>
+
+          <form (ngSubmit)="Register()" >
+              <table class="full-width" cellspacing="1"><tr>
+                  <td><mat-form-field class="full-width-input"  appearance="fill">
+                    <mat-label>First name</mat-label>
+                    <input name="firstName" [(ngModel)]="SiginUpForm.firstName"  matInput>
+                  </mat-form-field></td>
+                  <td><mat-form-field  class="full-width-input"  appearance="fill">
+                      <mat-label>Last Name</mat-label>
+                      <input  name="lastName" [(ngModel)]="SiginUpForm.lastName" matInput>
+                    </mat-form-field></td>
+                </tr>
+              </table>
+              <table class="full-width" cellspacing="0"><tr>
+                  <td><mat-form-field  class="full-width-input"   appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input  name="email" [(ngModel)]="SiginUpForm.email" type="email" matInput>
+                  </mat-form-field></td>
+                  <td><mat-form-field  class="full-width-input"  appearance="fill">
+                      <mat-label>Paaword</mat-label>
+                      <input  name="password" [(ngModel)]="SiginUpForm.password" type="password" matInput>
+                    </mat-form-field></td>
+                </tr>
+              </table>
+              <button [disabled]="loadSiginup" mat-raised-button color="primary" class="">Sigin Up</button>
+
+          </form>
+
+
+        </mat-card>           
+      </mat-grid-tile>
+    </mat-grid-list>
+</div>

@@ -1,0 +1,52 @@
+<mat-toolbar color="primary" class="flex stickyBar">
+  <button routerLink="/" mat-flat-button color="primary">
+    <h1>My Application</h1>
+  </button>
+  <div class="search-container">
+    <input id="search" type="search" #search (keyup.enter)="Search(search.value)" placeholder="Search.."/>
+  </div>
+  <div class="spacer">  </div> <!-- Add a spacer element to push the following elements to the right -->
+
+  <div class="float-right chat">
+    <button mat-icon-button>
+      <mat-icon class="facebook-chat-icon"
+      [ngClass]="chatService.UnreadedMsgNum !=0 ? 'is-notfy-chat-active':''" 
+      [routerLink]="['/chat/']">chat</mat-icon>
+
+      <span class="unread-messages is-notfy-chat-active" 
+      *ngIf="chatService.UnreadedMsgNum != 0"
+      >{{ chatService.UnreadedMsgNum }}</span>
+      <span class="unread-messages " 
+      *ngIf="chatService.UnreadedMsgNum == 0"
+      ></span>
+      
+      
+    </button>
+
+    <button mat-icon-button class="button-spacing">
+      <ng-container *ngIf="notificationService.IsThereIsUnreadedNotify > 0">
+        <mat-icon
+        [routerLink]="['/notifications/']"
+        class="is-notfy-chat-active "
+        >notifications_active</mat-icon>
+        <i>{{ notificationService.IsThereIsUnreadedNotify }}</i>
+      </ng-container>
+      
+      <ng-container *ngIf="notificationService.IsThereIsUnreadedNotify <= 0"  >
+
+        <mat-icon  
+        [routerLink]="['/notifications/']"
+         >notifications</mat-icon>
+      </ng-container>
+      
+
+
+    </button>
+    
+    <img [src]="this.usersNavService.UserServiceData.imageUrl ? this.usersNavService.UserServiceData.imageUrl : 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'" mat-button [matMenuTriggerFor]="beforeMenu" class="avatar-sm">
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item [routerLink]="['/profile/', this.usersNavService.UserServiceData._id]">Profile</button>
+      <button mat-menu-item (click)="LogUserOut()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

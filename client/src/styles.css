@@ -1,0 +1,390 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+
+.sidebar {
+  width: 20% !important;
+  padding: 2%;
+}
+
+.rigthbar {
+  width: 25% !important;
+  padding: 2%;
+}
+
+.homePosts {
+  width: 40% !important;
+  padding: 2%;
+}
+
+.ProfilePostsImage {
+  width: 100% !important;
+  height: 100% ;
+  height: 350px !important;  
+  height: 350px !important;
+}
+
+
+
+.center{
+  margin: 0 auto;
+}
+.stickyBar {
+    position: sticky;
+    position: -webkit-sticky; 
+    top: 0;
+    z-index: 1000; 
+  }
+
+.avatar-sm {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+.avatar-profile {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+
+.clearPM {    width: 100% !important;
+  padding: 4% 10%;
+  margin: 4% auto;
+  display: block !important;
+}
+
+.clearA {
+  width: 100% !important;
+  padding: 4% 4%;
+  margin: 0 auto;
+}
+
+.clearB {
+  width: 100% !important;
+  padding: 1% 4%;
+  margin: 0 auto;
+}
+
+.space{
+  padding-right: 6px;
+  padding-left: 6px;
+}
+.container{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.container-sm{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.container-right{
+  width: 60%;
+  margin: 5% auto;
+}
+
+.container-left{
+  width: 10%;
+  margin: 0 auto;
+}
+
+.fr{
+  float: right;
+}
+.fl{
+  float: left;
+}
+
+.full-width{
+  width: 100% !important;
+}
+
+.full-width-input{
+  width: 95% !important;
+  margin: 5px auto;
+}
+
+.half-width {
+ width: 50% !important;
+ margin: 1% auto;
+}
+
+/* Search styles */
+
+#search { background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAYAAABvVQZ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAT5JREFUeNqsVLtOw0AQtIMlRJHCEhUVMg398QEUSZnSfILzCXxDPsFu6XAJHWnTcS1lWsprKdmLxtKwvjVBYaTV7cm+udnX5fPb+yyBSmwhVmK/FfPZLyjUPhI8YtXYi23EOovs7PzyevAbsWeoGg5HNUHsCipX8F9TZDOstVgLPxIsxW6w3sHv6dJ2StkLbh6IPtR/AWRfSIET20H9D2U1hfaAgxY2KMagcBSmg9/rmwx0lBqTzGfHoVfVHxXgXzCjHNRHnnHke4vMGc2q0RBR0GSeCLlpLaJGFWKUszVuib32nih7iTFrjXAPyGnQ48c3Gu5AOVlMtMk6NZuf+FiC+AIhV0T+pBQ5ntXceIJKqKko2duJ2TwoLAz5QTVnagJaXWEO8y/wSMuKH9RTJoCTHyNZFidOUEfNu/8WYAAOXUT04MOtlwAAAABJRU5ErkJggg==) no-repeat 19px 19px; text-indent: .75em; display: inline-block; border: 0 none; width: 0; height: 2.7em; border-radius: 2.7em; -webkit-transition: .2s; transition: .2s; outline: none; padding: 1em 1.5em; cursor: pointer; -webkit-appearance: none; font-weight: inherit; font-size: inherit; font-family: inherit; color: #999; vertical-align: baseline; }
+
+#search:hover, #search:focus { background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAYAAABvVQZ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAT5JREFUeNqsVLtOw0AQtIMlRJHCEhUVMg398QEUSZnSfILzCXxDPsFu6XAJHWnTcS1lWsprKdmLxtKwvjVBYaTV7cm+udnX5fPb+yyBSmwhVmK/FfPZLyjUPhI8YtXYi23EOovs7PzyevAbsWeoGg5HNUHsCipX8F9TZDOstVgLPxIsxW6w3sHv6dJ2StkLbh6IPtR/AWRfSIET20H9D2U1hfaAgxY2KMagcBSmg9/rmwx0lBqTzGfHoVfVHxXgXzCjHNRHnnHke4vMGc2q0RBR0GSeCLlpLaJGFWKUszVuib32nih7iTFrjXAPyGnQ48c3Gu5AOVlMtMk6NZuf+FiC+AIhV0T+pBQ5ntXceIJKqKko2duJ2TwoLAz5QTVnagJaXWEO8y/wSMuKH9RTJoCTHyNZFidOUEfNu/8WYAAOXUT04MOtlwAAAABJRU5ErkJggg==) 14px 14px no-repeat; cursor: pointer;  }
+
+#search:focus { width: 30%; cursor: text; height: 50px; }
+
+/* Search Styles End */
+
+/* Grid Styles */
+.mgt>div{
+    display: inline-block !important;
+    padding: 50px ;
+
+}
+/* rightbar */
+.matlist{
+    padding: 9px !important;
+}
+
+
+.example-card {
+    max-width: 600px;
+  }
+  
+  .example-button-row>button {
+    width: 100%;
+    height: 50px;
+    font-size: large;
+    /* border-radius:15%; */
+  }
+
+
+
+  /* create post */
+.fixedbutton {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; 
+    padding: 10 auto;
+}
+.fixedbutton>button{
+  width: 75px;
+  height: 75px;
+}
+
+/* dialog */
+.dialog{
+  width: 500px;
+}
+.show-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.show-full-width {
+  width: 100%;
+}
+
+.pt5{
+  padding: 20px 0px 20px 0px;
+}
+
+/* home */
+.mat-paginator-page-size{
+  display: none !important;
+}
+
+/* pagenaiton */
+.mat-paginator-range-label {
+  color: blue;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.mat-paginator-icon{
+  display: inline-block !important;
+  width: 40px !important;
+  fill: blue !important;
+}
+
+
+.love-icon {
+  font-size: 30px !important;
+  height: 31px !important;
+  width: 31px !important;
+}
+
+.iconButton{
+  font-size: 16px !important;
+}
+
+
+/* chat component sytle stat   */
+
+.chat-room {
+  display: flex;
+  height: 600px;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 94vw; /* Take full width of the screen */
+}
+
+.user-list {
+  cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+  overflow: auto;
+
+  width: 200px;
+  background-color: #f8f8f8;
+  padding: 16px;
+  border-right: 1px solid #ddd;
+}
+
+
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  padding: 16px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.mat-list-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message {
+  display: flex; /* Add display flex to align user icon and message */
+  align-items: center; /* Align user icon and message vertically */
+  padding: 6px;
+  border-radius: 30px;
+  /* margin: 7px auto; */
+}
+
+.message p {
+  margin: 0;
+  margin-left: 8px; /* Add margin to separate user icon and message */
+}
+
+.message.sender {
+  align-self: flex-end;
+  background-color: #0084ff;
+  color: #fff;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: gray;
+}
+
+.user-icon {
+  margin-right: 8px;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+  position: sticky; /* Keep the input box sticky at the bottom */
+  bottom: 0;
+}
+
+.chat-input mat-form-field {
+  flex: 1;
+  margin-right: 16px;
+}
+
+button {
+  min-width: 80px;
+}
+
+.user-list .mat-list-item {
+  /* Add styles to make it look like a button */
+  padding: 8px;
+  transition: background-color 0.2s;
+}
+
+.user-list .mat-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+.user-list .mat-list-item:focus {
+  background-color: #e0e0e0;
+  outline: none;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info .mat-list-item {
+  padding: inherit;
+}
+
+.user-avatar {
+  margin-right: 8px;
+  font-size: 24px;
+}
+
+.username {
+  font-weight: bold;
+  padding: inherit;
+}
+
+.avatar-sm-xc {
+  width: 30px;
+  height: 30px;
+  padding: inherit;
+  border-radius: 50%;
+}
+
+.spacerx {
+  width: 10px; /* Adjust the width to your desired amount of space */
+  display: inline-block;
+}
+
+.spacery {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+
+}
+
+.online-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+
+
+.urms {
+  color: red !important;
+
+}
+
+
+/* chat component style end  */
+
+.mat-list-item.notifyread {
+  background-color: #e1e1e1;
+  /* Add any other styles you want for notifyread notifications */
+}
+
+
+
+
+
+

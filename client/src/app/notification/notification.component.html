@@ -1,0 +1,15 @@
+<mat-list>
+  
+    <mat-list-item 
+                  *ngFor="let notification of notify"  
+                  [class.notifyread]="!notification?.isreded"
+                  (click)="MoveToTheSourceOfThePost(notification)"
+                  >
+      <img [src]="notification.user?.avatar" *ngIf="notification.user?.avatar" mat-list-icon class="avatar-sm-xc">
+
+      <mat-icon *ngIf="!notification.user?.avatar"  mat-list-icon>account_circle</mat-icon> <!-- Use the user icon -->
+
+      <h3 mat-line>{{ notification.deatils }}</h3>
+      <p mat-line>{{ notification.user?.name }}</p>
+    </mat-list-item>
+  </mat-list>

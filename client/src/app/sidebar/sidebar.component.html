@@ -1,0 +1,23 @@
+<div class="example-button-row">
+
+    <button 
+        *ngIf="usersService.isAuthenticated"
+        [routerLink]="['/profile/', userid]"
+        mat-stroked-button 
+        color="primary"
+        >    
+        <mat-icon >account_circle</mat-icon> 
+        User Profile
+     </button>
+
+     <button 
+     *ngIf="!usersService.isAuthenticated"
+     routerLink="/auth" 
+     mat-stroked-button 
+     color="warn"
+     >    
+     <mat-icon >account_circle</mat-icon> 
+     Authenticatiion
+  </button>
+
+  </div>

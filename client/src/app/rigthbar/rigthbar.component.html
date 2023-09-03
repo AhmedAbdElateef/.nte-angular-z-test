@@ -1,0 +1,14 @@
+
+
+  <mat-list>
+    <div mat-subheader>
+      <h1>{{sugUsersList.length > 0  ?'':'NO'}} Suggestions For You </h1>
+    </div>
+    <ng-container *ngFor="let user of sugUsersList">
+      <mat-list-item (click)="MoveToUserPage(user._id)" style="cursor: pointer;" class="matlist">
+        <img [src]="user!.imageUrl ? user!.imageUrl :'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'" mat-button class="avatar-sm">
+       <div mat-subheader>{{user!.name}}</div>
+    </mat-list-item>
+     <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>

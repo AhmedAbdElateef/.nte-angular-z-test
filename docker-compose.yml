@@ -1,0 +1,135 @@
+version: '3'
+services:
+  DotNetApiServer:
+    image: ahmedkhalaf666/dotnet-angular-social-back-api
+    container_name: DotNetApiServer
+    restart: unless-stopped
+    ports:
+      - "7288:7288"
+    networks:
+      - app-network
+    volumes:
+      - ./backend/api:/src
+    environment:
+      - ASPNETCORE_URLS=https://+:7288 
+      - ASPNETCORE_HTTPS_PORT=7288 
+      # - ASPNETCORE_ENVIRONMENT=Development  
+    depends_on:
+      - mongodb
+  DotNetChatService:
+    image: ahmedkhalaf666/dotnet-angular-social-back-chat
+    container_name: DotNetChatService
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    volumes:
+      - ./backend/realTimeChat:/src
+    depends_on:
+      - mongodb
+      - DotNetApiServer
+  DotNetNotifyService:
+    image: ahmedkhalaf666/dotnet-angular-social-back-notification
+    container_name: DotNetNotifyService
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    networks:
+      - app-network
+    volumes:
+      - ./backend/realTimeNotification:/src
+    environment:
+      - ASPNETCORE_URLS=https://+:8090 
+      - ASPNETCORE_HTTPS_PORT=8090 
+      # - ASPNETCORE_ENVIRONMENT=Development  
+    depends_on:
+      - mongodb
+      - DotNetApiServer  
+ 
+  AngularServer:
+    image: ahmedkhalaf666/dotnet-angular-social-front
+    container_name: AngularServer
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"  # Expose port 443 for HTTPS
+    networks:
+      - app-network
+    # volumes:
+      # -  dist:/usr/share/nginx/html  # Update the volume path
+      #- ./client/nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount custom nginx.conf file
+      #- ./client/nginx/certs:/etc/nginx/certs  # Mount directory containing SSL certificate and key
+    depends_on:
+      - DotNetApiServer
+      - DotNetChatService
+      - DotNetNotifyService
+
+  # NginxProxy:
+  #   image: nginx:1.21.1-alpine
+  #   container_name: NginxProxy
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8443:443"  # Use a different host port (8443) for HTTPS
+  #   networks:
+  #     - app-network
+  #   volumes:
+  #     - ./client/.nginx/nginx.conf:/etc/nginx/nginx.conf  # Mount custom nginx.conf file
+  #     - ./certs:/etc/nginx/certs  # Mount directory containing SSL certificate and key
+  #   depends_on:
+  #     - AngularServer
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.2.1
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/usr/data/db
+    networks:
+      - app-network
+volumes:
+  dist:
+    driver: local
+  mongo-data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

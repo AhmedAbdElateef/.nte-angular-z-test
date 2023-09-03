@@ -1,0 +1,69 @@
+<ng-container *ngIf="If_UserIsTheCeator">
+  <button class="full-width " 
+  style="margin:auto" 
+  mat-button
+  color="primary" 
+  (click)="IS_Edit = true"
+  >
+<strong>EDID POST</strong>
+<mat-icon>more_vert</mat-icon>
+
+</button>
+<button class="full-width " 
+style="margin:auto" 
+mat-button
+color="warn" 
+(click)="Delete()">delete </button>
+</ng-container>
+
+
+<div  class="container flex justify-content-between">
+
+    <!-- if Edit Post  -->
+
+<div *ngIf="IS_Edit" style="margin:auto" mat-dialog-content class="dialog">
+ 
+
+  <form class="show-form" >
+    <mat-form-field class="show-full-width" appearance="fill">
+      <mat-label>User Title</mat-label>
+      <input name="title" [(ngModel)]="post.title"  matInput placeholder="Title" >
+    </mat-form-field>
+  
+    <mat-form-field class="show-full-width" appearance="fill">
+      <mat-label>What's on your mind</mat-label>
+      <textarea name="message" [(ngModel)]="post.message"  matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+
+    <div>
+      <img [src]="this.post.selectedFile" width="400px" alt="">
+    </div>
+    <div (click)="uploadFile.click()">
+        <button mat-raised-button color="primary">Select Image</button>
+        <input name="uploadFile" (change)="upload($event)" #uploadFile type='file' style="display:none"/> 
+    </div>
+    <div>
+      <img  width="400px" alt="">
+    </div>
+    <div class="pt5">
+        <button (click)="UpdateAndSave()" mat-raised-button class="p5">Save</button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+    <!-- if Show Post -->
+    <ng-container *ngIf="post._id !=null">
+      <app-post 
+      *ngIf="!IS_Edit"
+      style="margin:auto"
+      [IsShowEdit]="true"
+      [post]="post"
+  ></app-post>
+    </ng-container>
+
+
+</div>
