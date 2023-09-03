@@ -1,221 +1,126 @@
-# DotNet-Vue-SocialApp
 
+# to run
 
-# backend
+# docker-compose up -d
 
-# backend-sociaApp-Dotnet
 
-# create app
+# to take it down
 
-    dotnet new webapi -n backend
+# docker-compose down 
 
-    cd ./backend
 
-[install-packages]
+# visit ui
 
-    dotnet add package AspNetCore.Identity.MongoDbCore
+@https://localhost/
 
-    dotnet add package MongoDB.Bson
-    
 
-    dotnet add package MongoDB.Driver
+# visit swegger docs
 
+@https://localhost:7288/swagger
 
-    dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 
+######### Realtime SignlaR ############
 
+# Notification
 
-# crtl + shift + p 
+[  RealTimeNotificationUrl: 'https://localhost:8090/'  ]
 
-    docker add .. 
 
 
-# run the app with ports
+# code with TS
 
-    dotnet watch run --urls http://localhost:5000
+    private hubConnection!: HubConnection;
+    userid : string =  JSON.parse(localStorage.getItem('profile') as string)?.result?._id;
+    TryConnectedTime = 0;
+    notifyideslist : string[]= [];
+    constructor(private notService: NotificationService) {
 
+    this.hubConnection = new HubConnectionBuilder()
+    .withUrl(`${environment.RealTimeNotificationUrl}hubs/Notifications`)
+    .build();  
+    }
 
 
-# client
+    async connect() {
+    if(this.userid && this.TryConnectedTime == 0){
+    this.TryConnectedTime = this.TryConnectedTime + 1;
 
-[note]
-define or update the angular.json
-    Make            "outputPath": "dist",
+    this.hubConnection.start().then(() => {
+    if(this.userid){
+    this.hubConnection.invoke('JoinChannel', this.userid);
+    }
+    });
+    }
+    }
 
 
+    receiveNotification(): Observable<any> {
+    return new Observable<any>((observer) => {
+    this.hubConnection.on('ReceiveNotification', (notification: any) => {
+    if(!this.notifyideslist.includes(notification.id) || this.notifyideslist.length == 0){
+    this.notifyideslist.push(notification.id);
+    this.notService.IsThereIsUnreadedNotify = this.notService.IsThereIsUnreadedNotify + 1;
+    }
+    observer.next(notification);
+    });
+    });
+    }
 
+    stop(): void {
+    this.hubConnection.stop();
+    this.TryConnectedTime = 0;
+    }
 
-    npm i
 
-    ng serve
+# RealTime Chat
 
+[  RealTimeUrl: 'https://localhost:8000/']
 
-# DEVOPS 
-# Run With DevOps
+# code with TS
 
-    docker-compose up -d 
+    this.chatConnection = new HubConnectionBuilder()
+    .withUrl(`${environment.RealTimeUrl}hubs/chat?UserID=${this.userid}`).withAutomaticReconnect().build();
 
+    this.chatConnection.start().catch(error => {
+    console.log(error);
+    })
 
 
+    this.chatConnection.on('UserConnected', () => {
+    console.log('UserConnected')
+    if(this.userid){
+    this.addUserConnectionId(this.userid);
+    }
+    })
 
-# realtime
-# !!!!!!!!!! backend !!!!!!!!!!!!
+    this.chatConnection.on('OnlineUsers' + this.userid, (onlineUsers) => {
+    console.log('OnlineUsers')
+    // this.onlineUsers = [...onlineUsers];
+    // this.onlineUsersUpdated.emit(this.onlineUsers); // Emit the event with updated onlineUsers     
+    const uniqueUsers:string[] = Array.from(new Set(onlineUsers)); // Remove duplicates
+    this.onlineUsers = [...uniqueUsers];
+    this.onlineUsersUpdated.emit(this.onlineUsers); // Emit the event with updated onlineUsers
+    });
 
 
+    this.chatConnection.on('OpenPrivateChat', (newMessage: Message)=>{
+    console.log('OpenPrivateChat')
+    this.privateMessages = [...this.privateMessages, newMessage];
+    })
 
-# install app
+    this.chatConnection.on('NewPrivateMessage', (newMessage: Message)=>{
+    this.privateMessages = [...this.privateMessages, newMessage];
+    this.privateMessagesUpdated.emit(this.privateMessages); // Emit the event with updated onlineUsers
 
-    dotnet new webapi  -n backend
+    console.log('NewPrivateMessage', this.privateMessages)
 
+    })
 
-# realtime Service
 
-    dotnet new webapi  -n realTimeServices
-
-
-update the code base 
-remove 
-
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-
-from api.csproj
-
-
-remove 
-
-    "https": {
-        "commandName": "Project",
-        "dotnetRunMessages": ...
-        }
-
-upate http & IIS Express change 
-    "launchBrowser": true,
-    "launchBrowser": true,
-      to 
-    "launchBrowser": false,
-    "launchBrowser": false,
-
-from Properties
-
-
-
-[update-Program.cs]
-
-
-
-# RealTime
-# Client
-
-install signalr
-
-    npm install @microsoft/signalr
-
-
-to add environments
-
-    ng generate environments
-
-# to create service 
-    create folder names services
-# inside services folder hit this command
-
-    ng g s services/realtimechat --skip-tests
-
-
-# backend GRPC 
-# GRPC SERVER
-
-after creating proto file add package to the app
-
-    dotnet add package Grpc.AspNetCore  
-    dotnet add package Google.Protobuf 
-    dotnet add package Grpc.Tools 
-
-# add this to .csproj
-
-      <Protobuf Include="Protos/*.proto" GrpcServices="Server" />
-
-# Add a Grpc.AspNetCore.Server.Reflection package reference.
-
-
-    dotnet add package Grpc.AspNetCore.Server.Reflection 
-
-# update program.cs
-# update Properties/launchSettings.json
-
-
-     grpcurl localhost:7288 list
-
-# use postman import proto first 
-
-    grpcurl localhost:7288 describe TrackingService
-
-# ############## CLIENT ################ #
-
-    dotnet add package Grpc.Net.Client
-
-    dotnet add package Google.Protobuf
-
-    dotnet add package Grpc.Tools
-
-
-[add-to-csproj]
-
-<Protobuf Include="Protos/*.proto"  GrpcServices="Client" />
-
-
-# Angular After GRPC 
-
-we need now to use the https calling 
-
-so replace 
-    
-    http://localhost:5000
-
-with
-
-    https://localhost:7288
-
-
-# NOTIFICATION frontend
-
-    ng g s services/realtime-notifiy --skip-tests
-
-
-    ng g s services/notification.service --skip-tests
-
-
-
-# Notification backend
-
-    dotnet new webapi  -n realTimeNotification
-
-
-# we need to make api work as client Grpc
-
-[Run]
-
-    dotnet add package Grpc.Net.Client
-
-    dotnet add package Google.Protobuf
-
-    dotnet add package Grpc.Tools
-
-# GRPC SERVER
-
-after creating proto file add package to the app
-
-    dotnet add package Grpc.AspNetCore  
-    dotnet add package Google.Protobuf 
-    dotnet add package Grpc.Tools 
-
-    dotnet add package Grpc.AspNetCore.Server.Reflection 
-
-
-
-
-
+    this.chatConnection.on('ClosePrivateChat', ()=>{
+    console.log('ClosePrivateChat')
+    this.privateMessages = [];
+    })
 
 
 
